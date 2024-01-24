@@ -1,7 +1,8 @@
 # BBDD-Almacenamiento
 ## Proyecto grupal de Base de Datos en relación al almacenamiento
 
-### Alumno 1: ORACLE:
+### Alumno 1:
+#### ORACLE:
 
 1. [Muestra los espacios de tablas existentes en tu base de datos y la ruta de los ficheros que los componen. ¿Están las extensiones gestionadas localmente o por diccionario?](/Parte_Individual/Alumno_1/Ejercicio1.md)
 
@@ -15,21 +16,21 @@
 
 6. [Realiza un procedimiento llamado MostrarUsrsCuotaIlimitada que muestre los usuarios que puedan escribir de forma ilimitada en más de uno de los tablespaces que cuentan con ficheros en la unidad C:](/Parte_Individual/Alumno_1/Ejercicio6.md)
        
-Postgres:
+#### Postgres:
        
 7. [Averigua si existe el concepto de tablespace en Postgres, en qué consiste y las diferencias con los tablespaces de ORACLE.](/Parte_Individual/Alumno_1/Ejercicio7.md)
        
-MySQL:
+#### MySQL:
 
 8. [Averigua si pueden establecerse claúsulas de almacenamiento para las tablas o los espacios de tablas en MySQL.](/Parte_Individual/Alumno_1/Ejercicio8.md)
 
-MongoDB:
+#### MongoDB:
 
 9. [Averigua si existe el concepto de índice en MongoDB y las diferencias con los índices de ORACLE. Explica los distintos tipos de índice que ofrece MongoDB.](/Parte_Individual/Alumno_1/Ejercicio9.md)
 
 
-
-### Alumno 2: ORACLE:
+### Alumno 2:
+#### ORACLE:
 
 1. [Establece que los objetos que se creen en el TS1 (creado por Alumno 1) tengan un tamaño inicial de 200K, y que cada extensión sea del doble del tamaño que la anterior. El número máximo de extensiones debe ser de 3.](/Parte_Individual/Alumno_2/Ejercicio1.md)
        
@@ -62,18 +63,16 @@ Total Usuarios BD: nn
 No olvides incluir los tablespaces temporales y de undo.
 
 6.  [Realiza un procedimiento llamado MostrarDetallesIndices que reciba el nombre de una tabla y muestre los detalles sobre los índices que hay definidos sobre las columnas de la misma.](/Parte_Individual/Alumno_2/Ejercicio6.md)
-
        
-Postgres:
-       
+#### Postgres:
        
 7. [Averigua si existe el concepto de segmento y el de extensión en Postgres, en qué consiste y las diferencias con los conceptos correspondientes de ORACLE.](/Parte_Individual/Alumno_2/Ejercicio7.md)
        
-MySQL:
+#### MySQL:
 
 8. [Averigua si existe el concepto de espacio de tablas en MySQL y las diferencias con los tablespaces de ORACLE.](/Parte_Individual/Alumno_2/Ejercicio8.md)
 
-MongoDB:
+#### MongoDB:
 
 9. [Averigua si existe la posibilidad en MongoDB de decidir en qué archivo se almacena una colección.](/Parte_Individual/Alumno_2/Ejercicio9.md)
 
@@ -119,20 +118,21 @@ MongoDB:
 
 				Total Espacio Usuario en la BD: nnnnnnn K
 
-Postgres:
+#### Postgres:
        
 7. [Averigua si es posible establecer cuotas de uso sobre los tablespaces en Postgres.](/Parte_Individual/Alumno_3/Ejercicio7.md)
 
-MySQL:
+#### MySQL:
 
 8. [Averigua si existe el concepto de extensión en MySQL y si coincide con el existente en ORACLE.](/Parte_Individual/Alumno_3/Ejercicio8.md)
 
-MongoDB:
+#### MongoDB:
 
 9. [Averigua si en MongoDB puede saberse el espacio disponible para almacenar nuevos documentos.](/Parte_Individual/Alumno_3/Ejercicio9.md)
 
 
-### Alumno 4: ORACLE:
+### Alumno 4:
+#### ORACLE:
 
 1. [Crea un tablespace de undo e intenta crear una tabla en él.](/Parte_Individual/Alumno_4/Ejercicio1.md)
        
@@ -148,18 +148,17 @@ MongoDB:
 
 7. [Averigua si pueden establecerse claúsulas de almacenamiento para las tablas o los espacios de tablas en Postgres.](/Parte_Individual/Alumno_4/Ejercicio7.md)
 
-MySQL:
+#### MySQL:
 
 8. [Averigua si existe el concepto de índice en MySQL y si coincide con el existente en ORACLE. Explica los distintos tipos de índices existentes.](/Parte_Individual/Alumno_4/Ejercicio8.md)
 
-MongoDB:
+#### MongoDB:
 
 9. [Explica los distintos motores de almacenamiento que ofrece MongoDB, sus características principales y en qué casos es más recomendable utilizar cada uno de ellos.](/Parte_Individual/Alumno_4/Ejercicio9.md)
 
 
 ### Parte grupal:
-
-ORACLE:
+#### ORACLE:
 
 1. [Cread un índice para la tabla EMP de SCOTT que agilice las consultas por nombre de empleado en un tablespace creado específicamente para índices. ¿Dónde deberiáis ubicar el fichero de datos asociado? ¿Cómo se os ocurre que podriáis probar si el índice resulta de utilidad?](/Parte_Grupal/Ejercicio1.md)
        
