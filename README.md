@@ -1,6 +1,11 @@
 # BBDD-Almacenamiento
 ## Proyecto grupal de Base de Datos en relación al almacenamiento
 
+- Alumno 1 (Organizador):   Pepe
+- Alumno 2 (Facilitator):   Fran
+- Alumno 3 (Portavoz):      Fabio
+- Alumno 4 (Secretario):    Alex
+
 ### Alumno 1:
 #### ORACLE:
 
@@ -42,8 +47,8 @@
 
 5. [Hacer un procedimiento llamado MostrarUsuariosporTablespace que muestre por pantalla un listado de los tablespaces existentes con la lista de usuarios que tienen asignado cada uno de ellos por defecto y el número de los mismos, así:](/Parte_Individual/Alumno_2/Ejercicio5.md)
 
+```
 Tablespace xxxx:
-
 	Usr1
 	Usr2
 	...
@@ -51,14 +56,15 @@ Tablespace xxxx:
 Total Usuarios Tablespace xxxx: n1
 
 Tablespace yyyy:
-
 	Usr1
 	Usr2
 	...
-
+    
 Total Usuarios Tablespace yyyy: n2
 ....
 Total Usuarios BD: nn
+```
+
 
 No olvides incluir los tablespaces temporales y de undo.
 
@@ -91,6 +97,7 @@ No olvides incluir los tablespaces temporales y de undo.
 
 6. [Realiza un procedimiento llamado MostrarAlmacenamientoUsuario que reciba el nombre de un usuario y devuelva el espacio que ocupan sus objetos agrupando por dispositivos y archivos:](/Parte_Individual/Alumno_3/Ejercicio6.md)
 
+```
 				Usuario: NombreUsuario
 
 					Dispositivo:xxxx
@@ -117,7 +124,7 @@ No olvides incluir los tablespaces temporales y de undo.
 					…
 
 				Total Espacio Usuario en la BD: nnnnnnn K
-
+```
 #### Postgres:
        
 7. [Averigua si es posible establecer cuotas de uso sobre los tablespaces en Postgres.](/Parte_Individual/Alumno_3/Ejercicio7.md)
