@@ -1,0 +1,1 @@
+## 8. Averigua si existe el concepto de índice en MySQL y si coincide con el existente en ORACLE. Explica los distintos tipos de índices existentes.

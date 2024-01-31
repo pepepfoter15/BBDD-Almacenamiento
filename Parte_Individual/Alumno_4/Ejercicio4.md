@@ -1,0 +1,1 @@
+## 4. Averigua los segmentos existentes para realizar un ROLLBACK y el tamaño de sus extensiones.

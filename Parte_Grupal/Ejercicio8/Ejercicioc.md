@@ -1,0 +1,1 @@
+## c) Pepe quiere crear una tabla Prueba que ocupe inicialmente 256K en el tablespace Ventas.
