@@ -197,10 +197,10 @@ En nuestra empresa existen tres departamentos: Informática, Ventas y Producció
 
 9. Elaboración de un vídeo grupal resumiendo las diferencias de concepto y en la gestión de espacios de tabla, índices, claúsulas  de almacenamiento y segmentos y extensiones entre los cuatro SGBDs estudiados. Cada miembro del grupo hablará de uno de los siguientes temas:
 
-a) Espacios de Tabla y cuotas de uso de los mismos.
+a) Espacios de Tabla y cuotas de uso de los mismos. --> Fabio
 
-b) Índices. Secuencias.
+b) Índices. Secuencias. --> Fran
 
-c) Claúsulas de Almacenamiento. 
+c) Claúsulas de Almacenamiento. --> Alex
 
-d) Segmentos y Extensiones. Clusters de tablas.
+d) Segmentos y Extensiones. Clusters de tablas. --> Pepe
