@@ -13,7 +13,7 @@
 
 2. [Usa la vista del diccionario de datos v$datafile para mirar cuando fue la última vez que se ejecutó el proceso CKPT en tu base de datos.](/Parte_Individual/Alumno_1/Ejercicio2.md)
 
-3. [Intenta crear el tablespace TS1 con un fichero de 2M en tu disco que crezca automáticamente cuando sea necesario. ¿Puedes hacer que la gestión de extensiones sea por diccionario? Averigua la razón.]()
+3. [Intenta crear el tablespace TS1 con un fichero de 2M en tu disco que crezca automáticamente cuando sea necesario. ¿Puedes hacer que la gestión de extensiones sea por diccionario? Averigua la razón.](/Parte_Individual/Alumno_1/Ejercicio3.md)
 
 4. [Averigua el tamaño de un bloque de datos en tu base de datos. Cámbialo al doble del valor que tenga.](/Parte_Individual/Alumno_1/Ejercicio4.md)
 
