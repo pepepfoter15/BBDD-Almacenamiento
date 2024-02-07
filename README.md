@@ -83,7 +83,9 @@ No olvides incluir los tablespaces temporales y de undo.
 9. [Averigua si existe la posibilidad en MongoDB de decidir en qué archivo se almacena una colección.](/Parte_Individual/Alumno_2/Ejercicio9.md)
 
 
-### Alumno 3:ORACLE:
+### Alumno 3:
+
+#### ORACLE:
 
 1. [Muestra los objetos a los que pertenecen las extensiones del tablespace TS2 (creado por Alumno 2) y el tamaño de cada una de ellas.](/Parte_Individual/Alumno_3/Alumno3.md)
        
