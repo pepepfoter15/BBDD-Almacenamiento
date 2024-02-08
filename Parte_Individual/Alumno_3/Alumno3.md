@@ -129,6 +129,83 @@ SELECT de.segment_name,de.extent_id,dd.file_name FROM dba_extents de, dba_data_f
 
 > **5. Realiza un procedimiento llamado InformeRestricciones que reciba el nombre de una tabla y muestre los nombres de las restricciones que tiene, a qué columna o columnas afectan y en qué consisten exactamente.**
 
+Creo el procedimiento principal
+
+```sql
+CREATE OR REPLACE PROCEDURE InformeRestricciones (p_tabla
+varchar)
+IS
+BEGIN
+dbms_output.put_line(chr(9)||'----- Tabla: '||p_tabla||' -----'||chr(10));
+devolverconjunto(p_tabla);
+END;
+/
+```
+
+Procedimiento que devuelve el nombre de la restricción 
+
+```sql
+CREATE OR REPLACE PROCEDURE devolverconjunto (p_tabla varchar)
+IS
+cursor c_restricnames IS SELECT constraint_name FROM
+dba_constraints WHERE table_name = p_tabla;
+BEGIN
+for var in c_restricnames loop
+dbms_output.put_line('Nombre de la restriccion: '||
+var.constraint_name);
+devolvercolumnas(p_tabla,var.constraint_name);
+devolverconsiste(var.constraint_name);
+end loop;
+END;
+/
+```
+
+Procedimiento que devuelve las columnas afectadas por la restricción
+
+```sql
+CREATE OR REPLACE PROCEDURE devolvercolumnas (p_tabla
+varchar,p_restriccion varchar)
+IS
+cursor c_columnas IS SELECT column_name FROM dba_cons_columns
+WHERE table_name = p_tabla AND constraint_name = p_restriccion;
+BEGIN
+dbms_output.put_line(chr(9)||'--- Columna a la que afecta ---');
+for var in c_columnas loop
+dbms_output.put_line(chr(9)||'Nombre de la columna: '||
+var.column_name||chr(10));
+end loop;
+END;
+/
+```
+
+Procedimiento que devuelve el tipo de restricción y la descripción de esta
+
+```sql
+CREATE OR REPLACE PROCEDURE devolverconsiste (p_restriccion
+varchar)
+IS
+tipo dba_constraints.constraint_type%TYPE;
+descripcion dba_constraints.search_condition%TYPE;
+BEGIN
+SELECT constraint_type,search_condition INTO tipo,descripcion
+FROM dba_constraints WHERE constraint_name = p_restriccion;
+dbms_output.put_line(chr(9)||'--- En que consiste ---');
+dbms_output.put_line(chr(9)||'Tipo: '||tipo||' - '||'Descripcion: '||
+descripcion||chr(10)||chr(10));
+END;
+/
+```
+
+**Comprobación:**
+
+![Oracle](img/oracle5.png)
+
+Los tipos de restricciones en Oracle se definen con siglas:
+
+- 'P' para restricciones de clave primaria.
+- 'C' para restricciones de clave foránea (constraint).
+- Otros tipos pueden incluir 'U' para restricciones únicas, 'R' para restricciones de chequeo (check), entre otros.
+
 ### **Ejercicio 6**
 
 > **6. Realiza un procedimiento llamado MostrarAlmacenamientoUsuario que reciba el nombre de un usuario y devuelva el espacio que ocupan sus objetos agrupando por dispositivos y archivos:**
@@ -140,7 +217,7 @@ SELECT de.segment_name,de.extent_id,dd.file_name FROM dba_extents de, dba_data_f
 
 > **7. Averigua si es posible establecer cuotas de uso sobre los tablespaces en Postgres.**
 
-En PostgreSQL, no hay una función integrada para establecer cuotas de uso directamente en tablespaces a nivel de usuario. Sin embargo, hay algunas estrategias que puedes implementar para lograr un control de uso de espacio por usuario o por base de datos. Una de ellas es establecer límites de tamaño directamente en la base de datos.
+En PostgreSQL, no hay una función para asignar cuotas de uso directamente en tablespaces a nivel de usuario. Podemos lograr un control de uso de espacio por usuario o por base de datos directamente.
 
 ```sql
 CREATE DATABASE ejemplo WITH OWNER = usuario TABLESPACE = ejemplo CONNECTION LIMIT = -1 TEMPLATE template0 MAXSIZE 100MB;
@@ -156,7 +233,7 @@ En MySQL, el término "extensión" se utiliza para referirse a algo diferente en
 
 En MySQL, una "extensión" se refiere a un complemento opcional que agrega funcionalidades adicionales al servidor MySQL. Estas extensiones pueden ser funciones, almacenamientos de motores, plugins de autenticación, plugins de cifrado, y más.
 
-En Oracle, el término "extensión" se usa en un contexto diferente. En Oracle, una "extensión" se refiere a la capacidad de agregar nuevos métodos y atributos a un tipo de objeto definido por el usuario.
+En Oracle, una "extensión" se refiere a la capacidad de agregar nuevos métodos y atributos a un tipo de objeto definido por el usuario.
 
 En resumen en MySQL, una extensión agrega funcionalidades adicionales al servidor MySQL, mientras que en Oracle Database, una extensión permite la herencia de atributos y métodos en tipos de objetos definidos por el usuario.
 
