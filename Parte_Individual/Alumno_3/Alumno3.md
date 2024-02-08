@@ -36,6 +36,10 @@
 
 > **3. Crea el tablespace TS3 gestionado localmente con un tamaño de extension uniforme de 128K y un fichero de datos asociado. Cambia la ubicación del fichero de datos y modifica la base de datos para que pueda acceder al mismo. Crea en TS3 dos tablas e inserta registros en las mismas. Comprueba que segmentos tiene TS3, qué extensiones tiene cada uno de ellos y en qué ficheros se encuentran.**
 
+En Oracle, un tablespace de extensión uniforme es un tipo de tablespace donde todas las extensiones tienen el mismo tamaño. Es decir, cuando se asigna un nuevo segmento (como una tabla o un indice) a este tipo de tablespaces, Oracle asigna una cantidad fija de espacio para esa extensión en lugar de aumentar gradualmente el tamaño de esta a medida que se necesita.
+
+Esto hace que el disco no se fragmente y la velocidad de acceso sea menor, ya que cada extensión se guarda en bloques continuos.
+
 ```sql
 CREATE TABLESPACE TS3
 DATAFILE '/opt/oracle/oradata/ORCLCDB/TS3.dbf'
