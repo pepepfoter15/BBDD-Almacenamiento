@@ -147,7 +147,7 @@ Procedimiento que devuelve el nombre de la restricción
 ```sql
 CREATE OR REPLACE PROCEDURE devolverconjunto (p_tabla varchar)
 IS
-cursor c_restricnames IS SELECT constraint_name FROM
+cursor c_restricnombre IS SELECT constraint_name FROM
 dba_constraints WHERE table_name = p_tabla;
 BEGIN
 for var in c_restricnames loop
