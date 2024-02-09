@@ -48,3 +48,11 @@ DEFAULT STORAGE (
 ```
 
 ![ ](img/o103.png)
+
+
+NOTA: para saber la localización del tablespace en el sistema de ficheros, y poder crear el nuevo tablespace con el mismo nombre he usado esta consulta:
+```
+SELECT DISTINCT SUBSTR (file_name, 1, INSTR (file_name, '/', -1, 1))
+FROM DBA_DATA_FILES
+WHERE tablespace_name = 'TS1'
+```
