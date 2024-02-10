@@ -42,7 +42,7 @@ DEFAULT STORAGE (
        NEXT 400K
        MINEXTENTS 1
        MAXEXTENTS 3
-       PCTINCREASE 0
+       PCTINCREASE 100
        );
 
 ```
