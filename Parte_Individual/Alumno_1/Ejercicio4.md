@@ -2,7 +2,7 @@
 
 Para poder averiguar el tamaño de un bloque de datos en mi base de datos, tendremos que ejecutar la siguiente consulta:
 
-```
+```sql
 SELECT VALUE 
 FROM v$parameter 
 WHERE NAME = 'db_block_size';
@@ -15,7 +15,7 @@ Con esto, sabemos cuanto ocupa el tamaño de bloque de datos en mi base de datos
 El principal inconveniente que no es posible darle el valor doble que tenga al tamaño del bloque en Oracle así que tendremos que crear uno. 
 Para ello, tendremos que modificar en el sistenma el nuevo tamaño de bloque:
 
-```
+```sql
 ALTER SYSTEM SET DB_16k_CACHE_SIZE=100M;
 ```
 
@@ -23,7 +23,7 @@ ALTER SYSTEM SET DB_16k_CACHE_SIZE=100M;
 
 Después reiniciamos la base de datos para que se cargue la variable que hemos redefinido y creamos este nuevo tablespace.
 
-```
+```sql
 CREATE TABLESPACE TSPRUEBA 
 DATAFILE 'TSPRUEBA.dbf' 
 SIZE 1M 
@@ -34,7 +34,7 @@ BLOCKSIZE 16K;
 
 Para comprobar que el tamaño de bloque ha sido modificado correctamente, vamos a realizar la siguiente consulta:
 
-```
+```sql
 SELECT TABLESPACE_NAME, BLOCK_SIZE 
 from DBA_TABLESPACES 
 WHERE TABLESPACE_NAME = 'TSPRUEBA';
@@ -44,7 +44,7 @@ WHERE TABLESPACE_NAME = 'TSPRUEBA';
 
 Podemos ver que es distinto a los demás tablespaces ejecutando la misma consulta pero sin la clausura **WHERE**:
 
-```
+```sql
 SELECT TABLESPACE_NAME, BLOCK_SIZE 
 from DBA_TABLESPACES;
 ```

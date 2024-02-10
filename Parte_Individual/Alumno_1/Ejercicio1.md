@@ -2,7 +2,7 @@
 
 Para poder ver los ficheros de datos y ficheros temporales que componen los tablas spaces tenemos que ejecutar la siguiente consulta:
 
-```
+```sql
 SELECT FILE_NAME, TABLESPACE_NAME 
 FROM DBA_DATA_FILES 
 UNION 
@@ -15,7 +15,7 @@ FROM DBA_TEMP_FILES;
 
 Para poder visualizar de que tipo son las extensiones de cada tablaspace con la siguiente consulta:
 
-```
+```sql
 SELECT TABLESPACE_NAME, EXTENT_MANAGEMENT 
 FROM DBA_TABLESPACES;
 ```

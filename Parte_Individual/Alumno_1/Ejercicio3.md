@@ -2,7 +2,7 @@
 
 Para poder crear un tablespace TS1 con un fichero de 2M de nuestro disco que crezca automáticamente cuando sea necesario, tendremos que ejecutar este comando de creación para este mismo:
 
-```
+```sql
 CREATE TABLESPACE TS1 
 DATAFILE 'TS1.dbf' 
 SIZE 2M 
@@ -16,7 +16,7 @@ EXTENT MANAGEMENT LOCAL;
 
 Para ver que se ha creado correctamente, realizamos la consulta del ejercicio 1 para ver que se ha creado correctamente:
 
-```
+```sql
 SELECT TABLESPACE_NAME, EXTENT_MANAGEMENT 
 FROM DBA_TABLESPACES;
 ```
@@ -27,7 +27,7 @@ En mi caso como queremos saber si podemos hacer que la gestión de extensiones s
 
 Por ello, borramos todo lo refente a la tablespace:
 
-```
+```sql
 DROP TABLESPACE TS1 
 INCLUDING CONTENTS AND DATAFILES;
 ```
@@ -36,7 +36,7 @@ INCLUDING CONTENTS AND DATAFILES;
 
 Y creamos el nuevo tablespace:
 
-```
+```sql
 CREATE TABLESPACE TS1 
 DATAFILE 'TS1.dbf' 
 SIZE 2M 

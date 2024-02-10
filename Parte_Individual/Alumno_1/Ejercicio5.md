@@ -5,7 +5,7 @@ En ella mimma,  ubicamos campos como **SEGMENT_NAME** y **BYTES** que son el nom
 
 Con esto, dicho comenzamos la consulta:
 
-```
+```sql
 CREATE OR REPLACE PROCEDURE MostrarObjetosdeUsuarioenTS(P_NOMBRE_TS DBA_SEGMENTS.TABLESPACE_NAME%TYPE, P_USUARIO DBA_SEGMENTS.OWNER%TYPE) AS
     CURSOR C_OBJECTOS IS
     SELECT SEGMENT_NAME, SEGMENT_TYPE, BYTES/1024/1024 AS TAMANO_MB
@@ -26,7 +26,7 @@ END MostrarObjetosdeUsuarioenTS;
 
 Para comprobar que funciona correctamente, como tengo un usuario PEPE1 creado anteriormente y su respectivo tablespace USERS donde tiene creado unas tablas de un proyecto anterior:
 
-```
+```sql
 EXEC MostrarObjetosdeUsuarioenTS('USERS','PEPE1');
 ```
 
