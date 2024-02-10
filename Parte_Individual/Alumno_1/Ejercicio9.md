@@ -102,3 +102,21 @@ db.ejercicio9.insertMany([
     }
 ])
 ```
+
+Con los índices en MongoDB ya vistos, pasamos a ver los índices en Oracle.
+
+### Tipos de índices en Oracle:
+
+En Oracle existen 3 tipos de índices que son los siguientes:
+
+- **Table Index**: Este tipo de índice se utiliza para mejorar el rendimiento de las consultas al permitir un acceso más rápido a los datos en una tabla específica. La sintaxis es la siguiente: 
+
+```sql
+CREATE [UNIQUE|BITMAP] INDEX [schema.]index_name
+ON [schema.]table_name [tbl_alias]
+   (column [ASC | DESC]) index_clause index_attributes
+```
+
+- **Cluster Index**:
+
+- **Bitmap Join Index**:
