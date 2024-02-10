@@ -10,7 +10,7 @@ Pero tenemos que entender entre PostgreSQL tiene grandes diferencias en cuanto a
 
 En Oracle existen 3 tipos de tablespaces difrentes con su respectiva sintáxis de creación y funcionamiento. Estos son los siguientes:
 
-- **Tablespace permanente**: este tablespaces es un contenedor lógico que en una base de datos desempeña la función de almacenar datos, como por ejemplo tablas, vistas... Estos tablespaces se almacenan filesystem del servidor. Su sintáxis es la siguiente:
+- **Tablespace permanente**: este tablespaces es un contenedor lógico que en una base de datos desempeña la función de almacenar datos, como por ejemplo tablas, vistas... Estos tablespaces se almacenan filesystem del servidor. Su sintaxis es la siguiente:
 
 ```sql
 CREATE TABLESPACE nombre_ts
@@ -71,7 +71,7 @@ Con cada una de estas acciones, podemos hacer lo siguiente:
 **Nota: El archivo de registro de redo en Oracle, almacena un registro secuencial de todas las operaciones realizadas en la base de datos por si sucede algún imprevisto o error en la base de datos. Es fundamental para mantener la integridad y la consistencia de los datos, ya que facilita la recuperación de la base de datos a un estado anterior.**
 
 
-- **Tablespace temporal**: este tablespace temporal es un contenedor lógico que en una base de datos desempeña la función de almacenar datos temporales, por ejemplo como los datos que se crean durante una instrucción SQL. Estos datos se almacenan en filesystem del propio servidor. Su sintáxis es la siguiente:
+- **Tablespace temporal**: este tablespace temporal es un contenedor lógico que en una base de datos desempeña la función de almacenar datos temporales, por ejemplo como los datos que se crean durante una instrucción SQL. Estos datos se almacenan en filesystem del propio servidor. Su sintaxis es la siguiente:
 
 
 ```sql
@@ -108,7 +108,7 @@ Lo único a destacar es lo siguiente:
 1. `[ TABLESPACE GROUP { tablespace_group_name | '' } ]`: Esta parte de la sintaxis nos puede ser muy útil, ya que nos permite asociar el tablespace temporal a un grupo de tablespaces temporales. Los grupos de tablespaces temporales se utilizan para distribuir la carga de trabajo de las operaciones temporales entre múltiples tablespaces.
 
 
-- **Tablespace undo**:  este tablespace undo es un contenedor lógico que en una base de datos desempeña la función de almacenar información necesaria para restaurar los datos en un estado anterior si hay algún error o fallo en ella (así como un checkpoint). Su sintáxis es la siguiente:
+- **Tablespace undo**:  este tablespace undo es un contenedor lógico que en una base de datos desempeña la función de almacenar información necesaria para restaurar los datos en un estado anterior si hay algún error o fallo en ella (así como un checkpoint). Su sintaxis es la siguiente:
 
 ```sql
 CREATE UNDO TABLESPACE nombre_ts
