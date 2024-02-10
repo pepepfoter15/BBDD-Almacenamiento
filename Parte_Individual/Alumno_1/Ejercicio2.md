@@ -5,7 +5,7 @@ Este realiza una función de commit cuando se realiza un backup o copia de segur
 
 Para ver todos estos checkpoints, deberemos ejecutar la siguiente consulta:
 
-```
+```sql
 SELECT CHECKPOINT_TIME 
 FROM v$datafile;
 ```
@@ -14,7 +14,7 @@ FROM v$datafile;
 
 Si queremos filtar por la última vez que es ejecutó ese proceso, tendremos que agregarle el operando MAX() para ello.
 
-```
+```sql
 SELECT MAX(CHECKPOINT_TIME) 
 FROM v$datafile;
 ```

@@ -10,7 +10,7 @@ Para poder construir dicho procedimiento, tenemos que hacer una unión de tanto 
 
 Con esto dicho, pasamos a la creación del procedimiento:
 
-```
+```sql
 CREATE OR REPLACE PROCEDURE MostrarUsrsCuotaIlimitada AS
     CURSOR C_USUARIOS IS 
     SELECT USERNAME 
