@@ -83,7 +83,7 @@ EXEC insert_n (100000);
 
 ![ ](img/o405.png)
 
-Si el storage de la tabla es mas restrictivo:
+Si el storage de la tabla es mas restrictivo, aplicará el storage de la tabla:
 
 ```
 DROP TABLESPACE TS2 INCLUDING CONTENTS;
@@ -109,5 +109,7 @@ STORAGE (
 
 EXEC insert_n (100000);
 ```
+
+(No puedo demostrar esto por culpa de lo que explico en el ejercicio 2 sobre ASM.)
 
 ![ ](img/o406.png)

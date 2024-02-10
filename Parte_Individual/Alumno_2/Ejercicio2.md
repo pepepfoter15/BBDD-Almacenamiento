@@ -35,7 +35,45 @@ INSERT INTO Tabla2 VALUES (1);
 
 ![ ](img/o202.png)
 
-Vemos que el tamaño libre ha ascendido a 1024KB (1MB). Esto se debe a que oracle agrupa extensiones de bloques en grupos de 8 por defecto, ya que nuestra instalación gestiona localmente, en vez de por diccionario. En el momento que se introduce cualquier dato, el espacio mínimo pase a ser de 1mb, aun que esos datos ocupen 1 byte, como es en este caso.
+Vemos que el tamaño libre ha ascendido a 1024KB (1MB). Esto se debe a que oracle agrupa extensiones de bloques en grupos de 8 por defecto, ya que nuestra instalación gestiona el espacio de las tableaspaces localmente (LMT), en vez de por diccionario (DMT). En el momento que se introduce cualquier dato, el espacio mínimo pase a ser de 1mb, aun que esos datos ocupen 1 byte, como es en este caso. El espacio siempre se redondea al megabyte.
 
-*buscar archivo de config
+**Automatic Storage Management (ASM)**
+
+Si creamos el tablespace para que utilice el modo manual de gestión de espacio, pero en LMT, esto no es suficiente, ya que la configuración por defecto de la instalacion dbc se sopondrá 
+```
+CREATE TABLESPACE TS1
+DATAFILE &apos;TS1.dbf&apos;
+SIZE 200K
+AUTOEXTEND ON
+DEFAULT STORAGE (
+       INITIAL 200K
+       NEXT 400K
+       MINEXTENTS 1
+       MAXEXTENTS 3
+       PCTINCREASE 100
+       )
+SEGMENT SPACE MANAGEMENT MANUAL
+```
+(enseño el log por que hace un rato que intenté esto y se puede ver que ignora el "next")
+
+![ ](img/o206.png)
+
+En instalaciones standalone (sin nodos), el permiso necesario para hacer esto estará desactivado por defecto en la instancia. Se debe definir a la hora de hacer la instalación con el parametro de inicialización `INSTANCE_TYPE = ASM`, y no será posible cambiar esto sin hacer otra desde cero, ya que el disco en el que oracle está guardando datos, es el disco del sistema operativo, y utilizará los tamaños de bloque de este.
+
+```
+GRANT SYSASM TO SYS;
+
+SELECT USERNAME, SYSASM 
+FROM v$pwfile_users;
+```
+![ ](img/o205.png)
+
+En caso de un server con clusters configurado podríamos simplemente utilizar la utilidad srvctl para desactivarlo de forma permanente, y gestionar el espacio de nuestros tablespaces de forma manual como viene explicado arriba.
+
+![ ](img/o204.png)
+
+
+
+
+ 	
 
