@@ -26,10 +26,43 @@
 
 > **1. Muestra los objetos a los que pertenecen las extensiones del tablespace TS2 (creado por Alumno 2) y el tamaño de cada una de ellas.**
 
+```sql
+SELECT SEGMENT_NAME, EXTENT_ID, BYTES FROM DBA_EXTENTS WHERE TABLESPACE_NAME = 'TS2';
+```
+
+![Oracle](img/oracle1.png)
+
+
 ### **Ejercicio 2**
 
 
 > **2. Borra la tabla que está llenando TS2 consiguiendo que vuelvan a existir extensiones libres. Añade después otro fichero de datos a TS2.**
+
+Para ello primero eliminamos la tabla:
+
+```sql
+drop table pacientes;
+```
+
+![Oracle](img/oracle8.png)
+
+Una vez eliminada, añadimos un nuevo fichero de datos al tablespace:
+
+```sql
+ALTER TABLESPACE TS2 ADD DATAFILE '/opt/oracle/oradata/ORCLCDB/TS2-ext.dbf' SIZE 2M;
+```
+
+![Oracle](img/oracle9.png)
+
+Comprobamos que el fichero se ha creado correctamente:
+
+```sql
+select tablespace_name, file_name from dba_data_files WHERE tablespace_name='TS2';
+```
+
+![Oracle](img/oracle10.png)
+
+
 
 ### **Ejercicio 3**
 
@@ -213,6 +246,172 @@ Los tipos de restricciones en Oracle se definen con siglas:
 ### **Ejercicio 6**
 
 > **6. Realiza un procedimiento llamado MostrarAlmacenamientoUsuario que reciba el nombre de un usuario y devuelva el espacio que ocupan sus objetos agrupando por dispositivos y archivos:**
+
+
+```
+Usuario: NombreUsuario
+
+					Dispositivo:xxxx
+
+						Archivo: xxxxxxx.xxx
+
+								Tabla1......nnn K
+								…
+								TablaN......nnn K
+								Indice1.....nnn K
+								…
+								IndiceN.....nnn K
+
+						Total Espacio en Archivo xxxxxxx.xxx: nnnnn K
+
+						Archivo:...
+						…
+
+				
+					
+					Total Espacio en Dispositivo xxxx: nnnnnn K
+
+					Dispositivo: yyyy
+					…
+
+				Total Espacio Usuario en la BD: nnnnnnn K
+```
+
+Procedimiento principal:
+
+
+```sql
+CREATE OR REPLACE PROCEDURE MostrarAlmacenamientoUsuario
+(p_usuario varchar2)
+IS
+cursor c_tablespace is SELECT tablespace_name FROM dba_extents
+WHERE owner = p_usuario GROUP BY tablespace_name;
+BEGIN
+dbms_output.put_line('Usuario: '||p_usuario);
+for var in c_tablespace loop
+obtenerdispositivo(var.tablespace_name,p_usuario);
+end loop;
+totalbd(p_usuario);
+END;
+/
+```
+
+Procedimiento para obtener el dispositivo:
+
+```sql
+CREATE OR REPLACE PROCEDURE obtenerdispositivo (p_tablespace
+varchar2, p_usuario varchar2)
+IS
+v_guardardisp varchar2(30);
+BEGIN
+SELECT substr(file_name,1,INSTR(file_name,'/',1,3) - 1) INTO
+v_guardardisp FROM dba_data_files WHERE tablespace_name =
+p_tablespace;
+dbms_output.put_line(chr(9)||'Dispositivo: '||v_guardardisp);
+obtenerarchivo(p_tablespace,p_usuario);
+END;
+/
+```
+
+Procedimiento para obtener el archivo y el espacio total:
+
+```sql
+CREATE OR REPLACE PROCEDURE obtenerarchivo (p_tablespace
+varchar2, p_usuario varchar2)
+IS
+v_guardoarchiv varchar2(100);
+BEGIN
+SELECT file_name INTO v_guardoarchiv FROM dba_data_files WHERE
+tablespace_name = p_tablespace;
+dbms_output.put_line(chr(9)||chr(9)||'Archivo: '||v_guardoarchiv);
+obtenertamtablas(p_tablespace,p_usuario);
+dbms_output.put_line(chr(9)||chr(9)||'Total Espacio en Archivo '||
+v_guardoarchiv||': '||totalarch(p_tablespace,p_usuario)||' K');
+END;
+/
+```
+
+Procedimiento para obtener las tablas y sus tamaños:
+
+```sql
+CREATE OR REPLACE PROCEDURE obtenertamtablas (p_tablespace
+varchar2,p_usuario varchar2)
+IS
+cursor c_tablas is SELECT table_name FROM all_tables WHERE
+tablespace_name = p_tablespace AND owner = p_usuario;
+v_tamatab number(10);
+BEGIN
+for var in c_tablas loop
+SELECT bytes INTO v_tamatab FROM dba_segments WHERE owner
+= p_usuario AND segment_name = var.table_name;
+dbms_output.put_line(chr(9)||chr(9)||chr(9)||var.table_name||' - '||
+v_tamatab||' K');
+obtindices(p_tablespace,p_usuario,var.table_name);
+end loop;
+END;
+/
+```
+
+Procedimiento para obtener los indices y sus tamaños:
+
+```sql
+CREATE OR REPLACE PROCEDURE obtindices (p_tablespace varchar2,
+p_usuario varchar2, p_tabla varchar2)
+IS
+cursor c_indices is select index_name from dba_indexes WHERE
+TABLESPACE_NAME = p_tablespace AND OWNER = p_usuario AND
+TABLE_NAME = p_tabla;
+v_tamaind number(10);
+BEGIN
+for var in c_indices loop
+SELECT bytes INTO v_tamaind FROM dba_segments WHERE owner
+= p_usuario AND segment_name = var.index_name;
+dbms_output.put_line(chr(9)||chr(9)||chr(9)||chr(9)||
+var.index_name||' - '||v_tamaind||' K');
+end loop;
+END;
+/
+```
+
+Función para obtener el total del archivo:
+
+```sql
+CREATE OR REPLACE FUNCTION totalarch (p_tablespace varchar2,
+p_usuario varchar2)
+RETURN NUMBER
+IS
+v_totaldis number(10);
+BEGIN
+SELECT sum(bytes) INTO v_totaldis FROM dba_segments WHERE
+tablespace_name = p_tablespace AND owner = p_usuario;
+return v_totaldis;
+END;
+/
+```
+
+Procedimiento para obtener el tamaño total de la BD:
+
+```sql
+CREATE OR REPLACE PROCEDURE totalbd (p_usuario varchar2)
+IS
+v_total number(10);
+BEGIN
+SELECT sum(bytes) INTO v_total FROM dba_segments WHERE owner
+= p_usuario;
+dbms_output.put_line('Total Espacio Usuario en la BD: '||v_total||'K'||chr(10));
+END;
+/
+```
+
+```sql
+exec MostrarAlmacenamientoUsuario('C##USRPRACTICA');
+```
+
+Comprobación: 
+
+
+![Oracle](img/oracle6.png)
+
 
 
 ## **PostgreSQL**
