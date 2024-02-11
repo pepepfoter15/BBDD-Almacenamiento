@@ -251,30 +251,29 @@ Los tipos de restricciones en Oracle se definen con siglas:
 ```
 Usuario: NombreUsuario
 
-					Dispositivo:xxxx
+		Dispositivo:xxxx
 
-						Archivo: xxxxxxx.xxx
+			Archivo: xxxxxxx.xxx
 
-								Tabla1......nnn K
-								…
-								TablaN......nnn K
-								Indice1.....nnn K
-								…
-								IndiceN.....nnn K
-
-						Total Espacio en Archivo xxxxxxx.xxx: nnnnn K
-
-						Archivo:...
-						…
-
-				
-					
-					Total Espacio en Dispositivo xxxx: nnnnnn K
-
-					Dispositivo: yyyy
+					Tabla1......nnn K
 					…
+					TablaN......nnn K
+					Indice1.....nnn K
+					…
+					IndiceN.....nnn K
 
-				Total Espacio Usuario en la BD: nnnnnnn K
+			Total Espacio en Archivo xxxxxxx.xxx: nnnnn K
+
+			Archivo:...
+			…
+
+			
+		Total Espacio en Dispositivo xxxx: nnnnnn K
+
+		Dispositivo: yyyy
+		…
+
+	Total Espacio Usuario en la BD: nnnnnnn K
 ```
 
 Procedimiento principal:
