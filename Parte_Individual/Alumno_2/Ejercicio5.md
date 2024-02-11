@@ -61,7 +61,7 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE mostrar_temp AS
-    v_temp VARCHAR2;
+    v_temp VARCHAR2(50);
 BEGIN
     SELECT PROPERTY_VALUE INTO v_temp
     FROM DATABASE_PROPERTIES
@@ -72,7 +72,7 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE mostrar_undo AS
-    v_undo VARCHAR2;
+    v_undo VARCHAR2(50);
 BEGIN
     SELECT DISTINCT tablespace_name INTO v_undo
     FROM DBA_UNDO_EXTENTS;
@@ -85,3 +85,6 @@ END;
 ```
 EXEC MostrarUsuariosporTablespace
 ```
+
+![ ](img/o501.png)
+![ ](img/o502.png)
