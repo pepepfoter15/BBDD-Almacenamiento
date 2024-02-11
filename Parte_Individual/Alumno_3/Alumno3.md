@@ -30,7 +30,7 @@
 SELECT SEGMENT_NAME, EXTENT_ID, BYTES FROM DBA_EXTENTS WHERE TABLESPACE_NAME = 'TS2';
 ```
 
-![Oracle](img/oracle1.png)
+![Oracle](img/oracle7.png)
 
 
 ### **Ejercicio 2**
