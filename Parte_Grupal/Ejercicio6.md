@@ -46,3 +46,5 @@ SELECT temporary_tablespace
 FROM dba_users
 WHERE username = ' ';
 ```
+
+![ ](img/Ejer6.png)
