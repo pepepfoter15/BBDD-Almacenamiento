@@ -1,7 +1,7 @@
 # Postgres
 ## 7. Averigua si existe el concepto de segmento y el de extensión en Postgres, en qué consiste y las diferencias con los conceptos correspondientes de ORACLE.
 
-En PostgreSQL, aunque no hay un concepto directo de segmento o extensión. Los tablespaces y las tablas se guardan en ficheros y directorios del sistema. 
+En PostgreSQL, aunque no hay un concepto directo de segmento o extensión. Los tablespaces y las tablas se guardan en ficheros y directorios del sistema, que podemos controlar para que se comporten como tal. 
 
 ![ ](img/p701.png)
 
