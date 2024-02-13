@@ -156,9 +156,9 @@ ON [schema.]table_name [tbl_alias]
 
 Las acciones que realiza este índice son iguales al primero, la diferencia que se le añade las siguientes acciones: 
 
-5. `FROM [schema.]table_name [tbl_alias]`: Indica la tabla desde la cual se sacaremos los datos para crear el índice.
+1. `FROM [schema.]table_name [tbl_alias]`: Indica la tabla desde la cual se sacaremos los datos para crear el índice.
 
-6. `WHERE condition`: Especifica la condición que nos permite elegir qué filas se incluirán en el índice.
+2. `WHERE condition`: Especifica la condición que nos permite elegir qué filas se incluirán en el índice.
 
 
 En los índices **Table Index** y **Bitmap Join Index**, tenemos una acción que nos permiter elegir 
