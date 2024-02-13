@@ -162,6 +162,125 @@ SELECT de.segment_name,de.extent_id,dd.file_name FROM dba_extents de, dba_data_f
 
 > **4. Redimensiona los ficheros asociados a los tres tablespaces que has creado de forma que ocupen el mínimo espacio posible para alojar sus objetos.**
 
+Para la realización de este ejercicio vamos a necesitar conocer el espacio total de cada tablespace y el espacio usado de cada uno de ellos, conociendo ambos datos podemos redimensionarlos para que ocupen el minimo espacio posible. 
+
+En una primera aproximación, esto podríamos conseguirlo usando el comando:
+
+```sql
+ALTER TABLESPACE nombre_tablespace SHRINK SPACE;
+```
+
+Al ejecutar este comando, Oracle realiza las siguientes acciones:
+
+- Analiza la distribución de los segmentos de datos dentro del tablespace.
+- Reorganiza los segmentos para liberar espacio no utilizado al final de los archivos de datos.
+- Reduce el tamaño de los archivos de datos asociados al tablespace al mínimo necesario para almacenar los objetos que contiene.
+
+El problema que tenemos con esta sentencia es que **SHRINK SPACE**, solo puede ejecutarse con tablespaces **NON-SYSTEM**, es decir tablespaces que no son propios del sistema. Para comprobar el tipo de  los tablespaces que vamos a manipular podemos ejecutar la siguiente sentencia en Oracle:
+
+```sql
+SELECT TABLESPACE_NAME, CONTENTS FROM DBA_TABLESPACES;
+```
+
+![Oracle](img/4-1.png)
+
+Como podemos comprobar, los tablespaces son de tipo **PERMANENT**, estos tablespaces contienen datos que son permanentes y están diseñados para almacenar tablas, índices y otros objetos de la base de datos que deben conservarse a largo plazo.
+
+Ya que no podemos utilizar la opción que vimos anteriormente, vamos a redimensionar el tamaño de los ficheros de forma manual. Para esto, primero voy a comprobar el espacio total del tablespace.
+
+```sql
+SELECT tablespace_name, SUM(bytes)/1024/1024 AS "Total"
+FROM dba_data_files
+WHERE tablespace_name = 'TS1'
+GROUP BY tablespace_name;
+```
+
+![Oracle](img/4-2.png)
+
+
+El tamaño total es de 2 MB, ahora vamos a ver el espacio utilizado:
+
+```sql
+SELECT tablespace_name, SUM(bytes)/1024/1024 AS "Utilizado"
+FROM dba_segments
+WHERE tablespace_name = 'TS1'
+GROUP BY tablespace_name;
+```
+
+![Oracle](img/4-3.png)
+
+El espacio usado es de 0.625 MB o 65536 Bytes, para comprobar que este es realmente el espacio usado, voy a crear una nueva tabla que almacenará sus datos en este tablespace TS1 y comprobaré de nuevo ambos tamaños, tanto el total como el utilizado.
+
+```sql
+create table doctores (
+    cod_doctor varchar2(15) primary key,
+    nombre varchar2(50) NOT NULL,
+    apellidos varchar2(50) NOT NULL,
+    dni varchar2(9) NOT NULL UNIQUE,
+    fecha_nacimiento date NOT NULL,
+    especialidad varchar2(50) default 'pediatria' NOT NULL,
+    telefono varchar2(9) NOT NULL,
+    direccion varchar2(50) NOT NULL
+)
+TABLESPACE TS1;
+```
+
+```sql
+insert into doctores values ('DCBA4321', 'Paco', 'Gómez', '22555555B', TO_DATE('22/09/1968', 'dd/mm/yyyy'), 'cardiologia', '686748423', 'C/Antonio, 1, Madrid');
+insert into doctores values ('HGFE5678', 'Luisa', 'Pacheco', '32982333C', TO_DATE('14/07/1991', 'dd/mm/yyyy'), 'ginecologia', '683923578', 'C/Ciervo, 2, Murcia');
+insert into doctores values ('LKJI9012', 'Juan', 'López', '49234644D', TO_DATE('11/03/1989', 'dd/mm/yyyy'), 'neurologia', '974637534', 'C/Fiesta, 34, Sevilla');
+insert into doctores values ('ONML3456', 'Ana', 'García', '56789012E', TO_DATE('12/12/1955', 'dd/mm/yyyy'), 'psiquiatria', '625434111', 'C/Isabel II, 25, Barcelona');
+```
+
+![Oracle](img/4-4.png)
+
+Como podemos comprobar, el tamaño total no ha variado, en cambio el tamaño usado si ha sido modificado. Sabiendo esto podemos hacer la reducción.
+
+Sabemos que TS1 tiene un tamaño total de 2MB y de ellos estan usandose 0.25 MB. Haciendo un cálculo podemos obtener que el espacio libre de TS1 es 1.75 MB, ya que oracle no deja que en tamaño de reducción usemos números decimales, especificaremos que el fichero tras la redimensión va a ocupar 1MB, veremos que ocurre cuando ejecutamos esta sentencia:
+
+```sql
+ALTER DATABASE DATAFILE '/opt/oracle/product/19c/dbhome_1/dbs/TS1.dbf' RESIZE 1M;
+```
+
+![Oracle](img/4-5.png)
+
+Este mensaje de error indica que el tamaño especificado para redimensionar el archivo de datos es menor que el tamaño mínimo requerido. Esto ocurre porque Oracle requiere cierto espacio adicional para la administración interna y la estructura de los archivos de datos.
+
+Vamos a hacerlo ahora pero usando el tablespace TS3:
+
+```sql
+SELECT tablespace_name, SUM(bytes)/1024/1024 AS "Total"
+FROM dba_data_files
+WHERE tablespace_name = 'TS3'
+GROUP BY tablespace_name;
+
+SELECT tablespace_name, SUM(bytes)/1024/1024 AS "Utilizado"
+FROM dba_segments
+WHERE tablespace_name = 'TS3'
+GROUP BY tablespace_name;
+```
+
+![Oracle](img/4-6.png)
+
+Sabiendo esto, lo mínimo que podríamos redimensionar el tablespace TS3 es a 2MB aproximadamente.
+
+```sql
+ALTER DATABASE DATAFILE '/opt/oracle/oradata/ORCLCDB/TS3/TS3.dbf' RESIZE 2M;
+```
+
+![Oracle](img/4-7.png)
+
+Como podemos comprobar, el tamaño del fichero ha sido reducido a 2MB.
+
+
+**OBSERVACIÓN:** Para conocer la ruta del fichero de datos del tablespace en nuestro sistema podemos ejecutar la siguiente sentencia:
+
+```sql
+SELECT tablespace_name, file_name
+FROM dba_data_files
+WHERE tablespace_name = 'nombreTS';
+```
+
 ### **Ejercicio 5**
 
 > **5. Realiza un procedimiento llamado InformeRestricciones que reciba el nombre de una tabla y muestre los nombres de las restricciones que tiene, a qué columna o columnas afectan y en qué consisten exactamente.**
