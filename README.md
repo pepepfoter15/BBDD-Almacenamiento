@@ -6,6 +6,8 @@
 - [Alumno 3 (Portavoz):      Fabio](#Alumno-3)
 - [Alumno 4 (Secretario):    Alex](#Alumno-4)
 
+- [Parte Grupal](#Parte-grupal)
+
 ### Alumno 1:
 #### ORACLE:
 
