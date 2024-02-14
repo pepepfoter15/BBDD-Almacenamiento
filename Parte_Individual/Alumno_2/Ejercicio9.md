@@ -12,3 +12,5 @@ nano /etc/mongod.conf
 
 
 lo primero que nos da a configurar es la ruta de guardado. Podemos especificar la que queramos dentro del filesystem.
+
+**NOTA:** Cuidado con los permisos de acceso de los directorios necesarios para el funcionamiento, por ejemplo /tmp/
