@@ -8,7 +8,7 @@ mongod --config /etc/mongod.conf
 nano /etc/mongod.conf
 ```
 
-![ ](img/my901.png)
+![ ](img/mo901.png)
 
 
 lo primero que nos da a configurar es la ruta de guardado. Podemos especificar la que queramos dentro del filesystem.
