@@ -5,11 +5,17 @@ Para conseguir esta estructura, vamos a crear los siguientes tablespaces:
 ```sql
 CREATE TABLESPACE T_PRODUCCION
 DATAFILE 'prod1.dbf' SIZE 50M, 
-'prod2.dbf' SIZE 50M AUTOEXTEND ON;
+'prod2.dbf' SIZE 50M AUTOEXTEND ON
+DEFAULT STORAGE (
+    INITIAL 50M
+);
 
 CREATE TABLESPACE T_VENTAS
 DATAFILE 'vent.dbf' 
-SIZE 50M AUTOEXTEND ON;
+SIZE 50M AUTOEXTEND ON
+DEFAULT STORAGE (
+    INITIAL 50M
+);
 ```
 
 Una vez hecho esto, asignamos las cuotas para los tablespaces de los usuarios:
