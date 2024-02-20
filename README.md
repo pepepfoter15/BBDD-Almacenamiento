@@ -207,4 +207,4 @@ b) Índices. Secuencias. --> Fran
 
 c) Claúsulas de Almacenamiento. --> Alex
 
-d) Segmentos y Extensiones. Clusters de tablas. --> Pepe
+d) Segmentos y Extensiones. Clusters de tablas. --> Pepe https://youtu.be/w_nDYdAoAIk
