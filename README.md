@@ -203,7 +203,7 @@ En nuestra empresa existen tres departamentos: Informática, Ventas y Producció
 
 a) Espacios de Tabla y cuotas de uso de los mismos. --> Fabio
 
-b) Índices. Secuencias. --> Fran https://youtu.be/_vkNed_GpnI
+b) Índices. Secuencias. --> Fran https://youtu.be/-FOaUJLJbXQ
 
 c) Claúsulas de Almacenamiento. --> Alex
 
