@@ -205,6 +205,6 @@ a) Espacios de Tabla y cuotas de uso de los mismos. --> Fabio https://youtu.be/v
 
 b) Índices. Secuencias. --> Fran https://youtu.be/-FOaUJLJbXQ
 
-c) Claúsulas de Almacenamiento. --> Alex
+c) Claúsulas de Almacenamiento. --> Alex https://youtu.be/X1fqThMz8XQ
 
 d) Segmentos y Extensiones. Clusters de tablas. --> Pepe https://youtu.be/w_nDYdAoAIk
